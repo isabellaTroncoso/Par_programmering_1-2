@@ -1,4 +1,4 @@
-package com.pairprogammering.project.diamond;
+package com.pariprogrammering.exercise.diamond;
 
 public class Pyramid {
     public static void main(String[] args) {

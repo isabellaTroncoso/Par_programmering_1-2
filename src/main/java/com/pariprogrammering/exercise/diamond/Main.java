@@ -1,6 +1,6 @@
-package com.pairprogammering.project;
+package com.pariprogrammering.exercise.diamond;
 
-import com.pairprogammering.project.random.RandomGenerate;
+import com.pariprogrammering.exercise.diamond.random.RandomGenerate;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.pairprogammering.project.random;
+package com.pariprogrammering.exercise.diamond.random;
 
 public class RandomGenerate {
     String compliment;
