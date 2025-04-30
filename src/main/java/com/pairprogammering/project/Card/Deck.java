@@ -1,16 +1,18 @@
 package com.pairprogammering.project.Card;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Random;
 
 public class Deck {
     ArrayList<Card> cards;
+    ArrayList<Card> discardPile;
+
     Random random = new Random();
 
     public Deck() {
         cards = new ArrayList<>();
+        discardPile = new ArrayList<>();
 
         String [] suit = {"Hearts", "Clubs", "Diamonds", "Spades"};
         String [] value = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
@@ -22,16 +24,22 @@ public class Deck {
         }
     }
 
-    void shuffle() {
+    public void shuffle() {
         Collections.shuffle(cards);
     }
 
-    void drawCard(){
-     random.nextInt(0,13);
+    public Card drawCard() {
+        if (!cards.isEmpty()) {
+            return cards.remove(0);
+        } else {
+            return null;
+        }
     }
 
-    void discardCard(){
-    cards.remove(cards.size()-1);
+    public void discardCard(Card card) {
+        if (card != null) {
+            discardPile.add(card);
+            System.out.println("Card discarded " + card);
+        }
     }
-
 }
