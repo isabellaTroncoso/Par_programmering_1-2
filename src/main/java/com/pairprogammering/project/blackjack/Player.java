@@ -1,13 +1,20 @@
 package com.pairprogammering.project.blackjack;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Player {
     private String name;
     private int handValue = 0;
+    private List<Card> hand;
 
     public Player(String name, int handValue) {
         this.name = name;
         this.handValue = 0;
+        hand = new ArrayList<>();
     }
+
+
 
     public String getName() {
         return name;
@@ -24,7 +31,10 @@ public class Player {
     public void setHandValue(int handValue) {
         this.handValue = handValue;
     }
+
     public void addCard(Card card) {
+        hand.add(card);
 
     }
+
 }

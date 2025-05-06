@@ -14,8 +14,8 @@ public class Deck {
         cards = new ArrayList<>();
         discardPile = new ArrayList<>();
 
-        String [] suit = {"Hearts", "Clubs", "Diamonds", "Spades"};
-        String [] value = {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King"};
+        String [] suit = {"♣", "♦", "♥", "♠"};
+        String [] value = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
 
         for (String suits : suit) {
             for (String values : value) {
@@ -42,4 +42,12 @@ public class Deck {
             System.out.println("Card discarded " + card);
         }
     }
+
+
+
+
+
+
+
+
 }
