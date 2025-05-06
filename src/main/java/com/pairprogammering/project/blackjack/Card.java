@@ -1,4 +1,4 @@
-package com.pairprogammering.project.Card;
+package com.pairprogammering.project.blackjack;
 
 public class Card {
     String suit;

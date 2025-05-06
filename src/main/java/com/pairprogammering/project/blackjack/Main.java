@@ -1,4 +1,4 @@
-package com.pairprogammering.project.Card;
+package com.pairprogammering.project.blackjack;
 
 public class Main {
     public static void main(String[] args) {

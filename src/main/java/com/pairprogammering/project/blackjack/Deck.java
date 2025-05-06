@@ -1,11 +1,11 @@
-package com.pairprogammering.project.Card;
+package com.pairprogammering.project.blackjack;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Random;
 
 public class Deck {
-    ArrayList<Card> cards;
+    public ArrayList<Card> cards;
     ArrayList<Card> discardPile;
 
     Random random = new Random();
