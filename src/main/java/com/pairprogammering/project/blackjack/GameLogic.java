@@ -46,6 +46,10 @@ public class GameLogic {
             player.addCard(newCard);
             System.out.println("You drew: " + newCard);
 
+        } else if (choice.equals("stand")) {
+            System.out.println("You chose to stand.");
+        } else {
+            System.out.println("Invalid choice. Please choose 'hit' or 'stand'.");
         }
 
     }
