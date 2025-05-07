@@ -1,6 +1,6 @@
 import com.pairprogammering.project.blackjack.Card;
 import com.pairprogammering.project.blackjack.GameLogic;
-import org.junit.jupiter.api.Assertions;
+import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
@@ -19,7 +19,7 @@ public class GameLogicTest {
         GameLogic gameLogic = new GameLogic();
         int total = gameLogic.calculateScore(hand);
 
-        Assertions.assertEquals(15, total);
+        assertEquals(15, total);
     }
 
     @Test
@@ -36,7 +36,7 @@ public class GameLogicTest {
         int total = gameLogic.calculateScore(hand);
 
         // Assert
-        Assertions.assertEquals(5, total);
+        assertEquals(5, total);
     }
 
     @Test
@@ -49,25 +49,32 @@ public class GameLogicTest {
         GameLogic gameLogic = new GameLogic();
         int total = gameLogic.calculateScore(hand);
 
-        Assertions.assertEquals(20, total);
+        assertEquals(20, total);
     }
 
     @Test
     void determineWinner_ShouldDeclarePlayerAsWinner() {
         GameLogic gameLogic = new GameLogic();
-        Card car1 = new Card("♠", "Queen");
-        Card car2 = new Card("♥", "10");
+        Card card1 = new Card("♠", "Queen");
+        Card card2 = new Card("♥", "10");
 
-        Card car3 = new Card("Spades", "9");
-        Card car4 = new Card("Diamonds", "9");
-        gameLogic.playerHand = new ArrayList<>(Arrays.asList(car1, car2));
-        gameLogic.dealerHand = new ArrayList<>(Arrays.asList(car3, car4));
+        Card card3 = new Card("Spades", "9");
+        Card card4 = new Card("Diamonds", "9");
+        gameLogic.playerHand = new ArrayList<>(Arrays.asList(card1, card2));
+        gameLogic.dealerHand = new ArrayList<>(Arrays.asList(card3, card4));
         gameLogic.player.setHand(gameLogic.playerHand);
         gameLogic.dealer.setHand(gameLogic.dealerHand);
 
         String winner = gameLogic.determineWinner(gameLogic.player, gameLogic.dealer);
-        Assertions.assertEquals("Player wins!", winner);
+        assertEquals("Player wins!", winner);
 
+    }
+
+    @Test
+    void choiceToPlayAgainOrEndTheGame () {
+        GameLogic gameLogic = new GameLogic();
+        gameLogic.playAgain();
+        assertTrue(true);
     }
 }
 

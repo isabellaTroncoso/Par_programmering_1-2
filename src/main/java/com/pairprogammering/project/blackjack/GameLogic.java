@@ -43,7 +43,8 @@ public class GameLogic {
         }
     }
 
-    public void playerHit(Scanner scanner) {
+    public void playerHit() {
+        Scanner scanner = new Scanner(System.in);
         String choice;
         boolean playerBust = false;
         boolean dealerBust = false;
@@ -55,7 +56,7 @@ public class GameLogic {
             if (choice.equalsIgnoreCase("hit")) {
                 // Give the player another card
                 player.addCard(deck.drawCard());
-                System.out.println("Your hand: " + player.getHandValue());
+                System.out.println("Your hand: " + player.getHand());
 
                 // Check for bust
                 int playerTotal = calculateScore(playerHand);
@@ -141,4 +142,20 @@ public class GameLogic {
     }
 
 
+    public void playAgain() {
+        boolean playAgain = false;
+        String choice = "";
+
+        while (playAgain) {
+            System.out.println("Would like to play again? Y/N");
+
+            if (choice.equals("y")) {
+                playAgain = true;
+
+            } else if (choice.equals("n")) {
+                System.out.println("See you next time!");
+                break;
+            }
+        }
     }
+}
