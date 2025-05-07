@@ -8,10 +8,11 @@ public class Player {
     private int handValue = 0;
     private List<Card> hand;
 
+
     public Player(String name, int handValue) {
         this.name = name;
         this.handValue = 0;
-        hand = new ArrayList<>();
+        this.hand = new ArrayList<>();
     }
 
 
@@ -30,6 +31,12 @@ public class Player {
 
     public void setHandValue(int handValue) {
         this.handValue = handValue;
+    }
+    public List<Card> getHand() {
+        return hand;
+    }
+    public void setHand(List<Card> hand) {
+        this.hand = hand;
     }
 
     public void addCard(Card card) {

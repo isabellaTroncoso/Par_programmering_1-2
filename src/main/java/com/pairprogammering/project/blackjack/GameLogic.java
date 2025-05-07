@@ -6,8 +6,11 @@ import java.util.Scanner;
 
 public class GameLogic {
     private Deck deck;
-    private Player player;
-    private Player dealer;
+    public Player player;
+    public Player dealer;
+    public ArrayList<Card> playerHand;
+    public ArrayList<Card> dealerHand;
+
 
     public GameLogic() {
         this.deck = new Deck();
@@ -18,13 +21,17 @@ public class GameLogic {
     public void startGame() {
         deck.shuffle();
 
-        List<Card> playerHand = new ArrayList<>();
-        List<Card> dealerHand = new ArrayList<>();
+        playerHand = new ArrayList<>();
+        dealerHand = new ArrayList<>();
 
         for (int i = 0; i < 2; i++) {
             playerHand.add(deck.drawCard());
             dealerHand.add(deck.drawCard());
         }
+
+        player.setHand(playerHand);
+        dealer.setHand(dealerHand);
+
         System.out.println("Players hand: ");
         for (Card card : playerHand) {
             System.out.println(card);
@@ -38,8 +45,34 @@ public class GameLogic {
 
     public void playerHit(Scanner scanner) {
         String choice;
+        boolean playerBust = false;
+        boolean dealerBust = false;
 
-        System.out.println("Do you want to hit or stand?");
+        while (true) {
+            System.out.print("Hit or stand? ");
+            choice = scanner.nextLine();
+
+            if (choice.equalsIgnoreCase("hit")) {
+                // Give the player another card
+                player.addCard(deck.drawCard());
+                System.out.println("Your hand: " + player.getHandValue());
+
+                // Check for bust
+                int playerTotal = calculateScore(playerHand);
+                if (playerTotal > 21) {
+                    System.out.println("Bust! You lose.");
+                    playerBust = true;
+                    break;
+                }
+            } else if (choice.equalsIgnoreCase("stand")) {
+                break;
+            } else {
+                System.out.println("Invalid choice. Please enter 'hit' or 'stand'.");
+            }
+        }
+
+
+        /*System.out.println("Do you want to hit or stand?");
         choice = scanner.nextLine();
         if (choice.equals("hit")){
             Card newCard = deck.drawCard();
@@ -50,7 +83,7 @@ public class GameLogic {
             System.out.println("You chose to stand.");
         } else {
             System.out.println("Invalid choice. Please choose 'hit' or 'stand'.");
-        }
+        }*/
 
     }
 
@@ -59,6 +92,11 @@ public class GameLogic {
             Card newCard = deck.drawCard();
             dealersHand.add(newCard);
             System.out.println("Dealer drew: " + newCard);
+        }
+        if (calculateScore(dealersHand) > 21) {
+            System.out.println("Dealer busts! You win!");
+        } else {
+            System.out.println("Dealer's hand: " + dealersHand);
         }
     }
 
@@ -89,5 +127,18 @@ public class GameLogic {
     }
 
 
+    public String determineWinner(Player player, Player dealer) {
+        int playerTotal = calculateScore(playerHand);
+        int dealerTotal = calculateScore(dealerHand);
 
-}
+        if (playerTotal > dealerTotal) {
+            return "Player wins!";
+        } else if (dealerTotal > playerTotal) {
+            return "Dealer wins.";
+        } else {
+            return "It's a tie!";
+        }
+    }
+
+
+    }
