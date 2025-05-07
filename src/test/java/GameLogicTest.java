@@ -55,17 +55,26 @@ public class GameLogicTest {
     @Test
     void determineWinner_ShouldDeclarePlayerAsWinner() {
         GameLogic gameLogic = new GameLogic();
+
+
         Card card1 = new Card("♠", "Queen");
         Card card2 = new Card("♥", "10");
 
-        Card card3 = new Card("Spades", "9");
-        Card card4 = new Card("Diamonds", "9");
+        Card card3 = new Card("♠", "9");
+        Card card4 = new Card("♦", "9");
+
+
         gameLogic.playerHand = new ArrayList<>(Arrays.asList(card1, card2));
         gameLogic.dealerHand = new ArrayList<>(Arrays.asList(card3, card4));
+
+
         gameLogic.player.setHand(gameLogic.playerHand);
         gameLogic.dealer.setHand(gameLogic.dealerHand);
 
-        String winner = gameLogic.determineWinner(gameLogic.player, gameLogic.dealer);
+
+        String winner = gameLogic.determineWinner();
+
+
         assertEquals("Player wins!", winner);
 
     }
@@ -78,21 +87,21 @@ public class GameLogicTest {
     }
 }
 
-    // 4. Tydlig återkoppling till spelaren
+    //  Tydlig återkoppling till spelaren
     //Tex. visa total poäng, status efter varje drag (hit/stand).
     //
     //Test: Efter varje hit visas aktuell poäng
     //
     //Behöver: Utskrift och logik i playerHit()
     //
-    //🔹 5. Hantera blackjack direkt
+    // Hantera blackjack direkt
     //Om någon får exakt 21 poäng från start, bör det hanteras.
     //
     //Test: Givet en hand med Ace + King → spelet avslutas med vinst
     //
     //Behöver: Kontroll direkt efter start
     //
-    //🔹 6. TDD-tester för Player-klassen
+    // TDD-tester för Player-klassen
     //Exempel: Testa att addCard() lägger till kort i spelarens hand korrekt.
 
 

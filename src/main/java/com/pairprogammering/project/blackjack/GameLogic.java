@@ -88,16 +88,16 @@ public class GameLogic {
 
     }
 
-    public void dealerTurn(List<Card>dealersHand, Deck deck) {
-        while (calculateScore (dealersHand) < 17) {
+    public void dealerTurn() {
+        while (calculateScore (dealerHand) < 17) {
             Card newCard = deck.drawCard();
-            dealersHand.add(newCard);
+            dealerHand.add(newCard);
             System.out.println("Dealer drew: " + newCard);
         }
-        if (calculateScore(dealersHand) > 21) {
+        if (calculateScore(dealerHand) > 21) {
             System.out.println("Dealer busts! You win!");
         } else {
-            System.out.println("Dealer's hand: " + dealersHand);
+            System.out.println("Dealer's hand: " + dealerHand);
         }
     }
 
@@ -128,7 +128,7 @@ public class GameLogic {
     }
 
 
-    public String determineWinner(Player player, Player dealer) {
+    public String determineWinner() {
         int playerTotal = calculateScore(playerHand);
         int dealerTotal = calculateScore(dealerHand);
 
