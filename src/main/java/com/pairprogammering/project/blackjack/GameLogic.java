@@ -36,11 +36,13 @@ public class GameLogic {
         for (Card card : playerHand) {
             System.out.println(card);
         }
+        System.out.println("Total points: " + calculateScore(player.getHand()));
 
         System.out.println("Dealers hand: ");
         for (Card card : dealerHand) {
             System.out.println(card);
         }
+        System.out.println("Total points: " + calculateScore(dealer.getHand()));
     }
 
     public boolean playerTurn() {
@@ -51,9 +53,10 @@ public class GameLogic {
             String choice = scanner.nextLine();
 
             if (choice.equalsIgnoreCase("hit")) {
-                playerHit(); // lägg till kort
+                playerHit();// lägg till kort
 
                 int playerTotal = calculateScore(player.getHand());
+
 
                 if (playerTotal > 21) {
                     System.out.println("Bust! You lose.");
@@ -77,7 +80,7 @@ public class GameLogic {
 
     public void playerHit() {
         player.addCard(deck.drawCard());
-        System.out.println("Your hand: " + player.getHand());
+        System.out.println("Your hand: " + player.getHand() + " Total points: " + calculateScore(player.getHand()));
     }
 
 
@@ -95,7 +98,7 @@ public class GameLogic {
         }
 
         int dealerTotal = calculateScore(dealerHand);
-        System.out.println("Dealer's hand: " + dealerHand);
+        System.out.println("Dealer's hand: " + dealerHand + " Total points: " + calculateScore(dealerHand));
         return dealerTotal > 21;
     }
 
@@ -182,4 +185,5 @@ public class GameLogic {
 
         System.out.println("Thanks for playing!");
     }
+
 }

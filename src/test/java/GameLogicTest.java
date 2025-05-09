@@ -85,6 +85,16 @@ public class GameLogicTest {
         gameLogic.playAgain();
         assertTrue(true);
     }
+
+    @Test
+    void showScoreOrStatusFromEveryCardDraw_countingPoints(){
+        GameLogic gameLogic = new GameLogic();
+        List<Card> hand = new ArrayList<>();
+        hand.add(new Card("♠", "10"));
+        hand.add(new Card("♥", "9"));
+        System.out.println("Current hand: " + gameLogic.calculateScore(hand));
+        assertEquals(19, gameLogic.calculateScore(hand));
+    }
 }
 
     //  Tydlig återkoppling till spelaren
