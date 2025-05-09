@@ -8,10 +8,10 @@ public class Blackjack {
     }
 
     public void play() {
-        game.startGame();
-        game.playerHit();
-        game.dealerTurn();
-        game.determineWinner();
+//        game.startGame();
+//        game.playerHit();
+//        game.dealerTurn();
+//        game.determineWinner();
         game.playAgain();
     }
 }

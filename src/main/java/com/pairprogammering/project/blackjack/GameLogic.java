@@ -43,62 +43,60 @@ public class GameLogic {
         }
     }
 
-    public void playerHit() {
+    public boolean playerTurn() {
         Scanner scanner = new Scanner(System.in);
-        String choice;
-        boolean playerBust = false;
-        boolean dealerBust = false;
 
         while (true) {
             System.out.print("Hit or stand? ");
-            choice = scanner.nextLine();
+            String choice = scanner.nextLine();
 
             if (choice.equalsIgnoreCase("hit")) {
-                // Give the player another card
-                player.addCard(deck.drawCard());
-                System.out.println("Your hand: " + player.getHand());
+                playerHit(); // lägg till kort
 
-                // Check for bust
-                int playerTotal = calculateScore(playerHand);
+                int playerTotal = calculateScore(player.getHand());
+
                 if (playerTotal > 21) {
                     System.out.println("Bust! You lose.");
-                    playerBust = true;
-                    break;
+                    return true;
+                } else if (playerTotal == 21) {
+                    System.out.println("You hit 21! Let's see what the dealer gets.");
+                    return false;
                 }
+
             } else if (choice.equalsIgnoreCase("stand")) {
-                break;
+                return false;
             } else {
                 System.out.println("Invalid choice. Please enter 'hit' or 'stand'.");
             }
         }
-
-
-        /*System.out.println("Do you want to hit or stand?");
-        choice = scanner.nextLine();
-        if (choice.equals("hit")){
-            Card newCard = deck.drawCard();
-            player.addCard(newCard);
-            System.out.println("You drew: " + newCard);
-
-        } else if (choice.equals("stand")) {
-            System.out.println("You chose to stand.");
-        } else {
-            System.out.println("Invalid choice. Please choose 'hit' or 'stand'.");
-        }*/
-
     }
 
-    public void dealerTurn() {
-        while (calculateScore (dealerHand) < 17) {
+
+
+
+
+    public void playerHit() {
+        player.addCard(deck.drawCard());
+        System.out.println("Your hand: " + player.getHand());
+    }
+
+
+
+    public boolean dealerTurn() {
+        while (calculateScore(dealerHand) < 17) {
             Card newCard = deck.drawCard();
             dealerHand.add(newCard);
             System.out.println("Dealer drew: " + newCard);
+
+            if (calculateScore(dealerHand) > 21) {
+                System.out.println("Dealer busts! You win!");
+                return true;
+            }
         }
-        if (calculateScore(dealerHand) > 21) {
-            System.out.println("Dealer busts! You win!");
-        } else {
-            System.out.println("Dealer's hand: " + dealerHand);
-        }
+
+        int dealerTotal = calculateScore(dealerHand);
+        System.out.println("Dealer's hand: " + dealerHand);
+        return dealerTotal > 21;
     }
 
     public int calculateScore(List<Card> hand) {
@@ -141,21 +139,47 @@ public class GameLogic {
         }
     }
 
+    public void playOneRound() {
+        startGame();
 
-    public void playAgain() {
-        boolean playAgain = false;
-        String choice = "";
+        int playerTotal = calculateScore(player.getHand());
+        int dealerTotal = calculateScore(dealer.getHand());
 
-        while (playAgain) {
-            System.out.println("Would like to play again? Y/N");
+        if (playerTotal == 21 && dealerTotal == 21) {
+            System.out.println("Both have Blackjack! It's a tie!");
+            return;
+        } else if (playerTotal == 21) {
+            System.out.println("Blackjack! You win!");
+            return;
+        } else if (dealerTotal == 21) {
+            System.out.println("Dealer has Blackjack! You lose.");
+            return;
+        }
 
-            if (choice.equals("y")) {
-                playAgain = true;
+        boolean playerBusted = playerTurn();
 
-            } else if (choice.equals("n")) {
-                System.out.println("See you next time!");
-                break;
+        if (!playerBusted) {
+            boolean dealerBusted = dealerTurn();
+            if (!dealerBusted) {
+                System.out.println(determineWinner());
             }
         }
+    }
+
+
+
+    public void playAgain() {
+        Scanner scanner = new Scanner(System.in);
+        boolean playAgain = true;
+
+        while (playAgain) {
+            playOneRound(); // spela en runda
+
+            System.out.print("Would you like to play again? (y/n): ");
+            String choice = scanner.nextLine();
+            playAgain = choice.equalsIgnoreCase("y");
+        }
+
+        System.out.println("Thanks for playing!");
     }
 }
