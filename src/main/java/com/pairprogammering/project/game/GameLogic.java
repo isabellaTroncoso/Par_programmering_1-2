@@ -13,16 +13,12 @@ public class GameLogic {
     public static ArrayList<Card> dealerHand;
 
 
-
     public GameLogic() {
         this.player = new Player("Player", 0);
         this.dealer = new Player("Dealer", 0);
         this.playerHand = new ArrayList<>();
         this.dealerHand = new ArrayList<>();
     }
-
-
-
 
     public static int calculateScore(List<Card> hand) {
         int score = 0;
@@ -41,33 +37,24 @@ public class GameLogic {
             }
         }
 
-        // Justera om vi har för hög poäng och ess som kan bli 1 istället
         while (score > 21 && aceCount > 0) {
-            score -= 10; // Ändra en Ace från 11 till 1
+            score -= 10;
             aceCount--;
         }
 
         return score;
     }
 
-
     public static String determineWinner(Player player, Player dealer) {
         int playerTotal = calculateScore(player.getHand());
         int dealerTotal = calculateScore(dealer.getHand());
 
         if (playerTotal > dealerTotal) {
-            return "Player wins!";
+            return "♣♦♥♠ Player wins! ♥♠♣♦";
         } else if (dealerTotal > playerTotal) {
-            return "Dealer wins.";
+            return "Dealer wins!";
         } else {
             return "It's a tie!";
         }
     }
-
 }
-/*
-* En klass som hanterar scanner input och system.out.println
-* En klass som hanterar spelets regler, score, ace till 1 eller 11
-* En klass som kör spelet, rundor, players turn etc
-* En interface som för if-else if-else
-* */

@@ -14,9 +14,11 @@ public class UserInterface {
     }
 
     public void showHand(String name, List<Card> hand, int score) {
+        System.out.println();
         System.out.println(name + "'s hand: ");
         hand.forEach(System.out::println);
         System.out.println("Total points: " + score);
+        System.out.println();
     }
 
     public boolean askPlayAgain() {
@@ -29,9 +31,19 @@ public class UserInterface {
     }
 
     public void welcomeMessage() {
-        System.out.println("♣♦♥♠ Welcome to Blackjack! ♥♠♣♦");
-        System.out.println("Rules:The goal is to get 21 or as close as possible — without going over. The dealer must draw cards until reaching at least 17. Don’t forget: an Ace is worth 11, but counts as 1 if 11 would make you bust. Best hand wins! ");
-        System.out.println("Good luck! Press Enter when you're ready");
+        System.out.println("""
+        ♣♦♥♠ Welcome to Blackjack! ♥♠♣♦
+
+        Rules:
+        The goal is to get 21 or as close as possible — without going over.
+        The dealer must draw cards until reaching at least 17.
+        Don’t forget: an Ace is worth 11, but counts as 1 if 11 would make you bust.
+        Best hand wins!
+
+        Good luck!
+        Press enter when you're ready..
+        """);
+
         scanner.nextLine();
     }
 }

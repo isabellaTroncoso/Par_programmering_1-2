@@ -57,34 +57,21 @@ public class GameLogicTest {
     void determineWinner_ShouldDeclarePlayerAsWinner() {
         GameLogic gameLogic = new GameLogic();
 
-
         Card card1 = new Card("♠", "Queen");
         Card card2 = new Card("♥", "10");
 
         Card card3 = new Card("♠", "9");
         Card card4 = new Card("♦", "9");
 
-
         gameLogic.playerHand = new ArrayList<>(Arrays.asList(card1, card2));
         gameLogic.dealerHand = new ArrayList<>(Arrays.asList(card3, card4));
-
 
         gameLogic.player.setHand(gameLogic.playerHand);
         gameLogic.dealer.setHand(gameLogic.dealerHand);
 
-
-        String winner = gameLogic.determineWinner();
-
+        String winner = gameLogic.determineWinner(gameLogic.player, gameLogic.dealer);
 
         assertEquals("Player wins!", winner);
-
-    }
-
-    @Test
-    void choiceToPlayAgainOrEndTheGame () {
-        GameRound gameRound = new GameRound();
-        gameRound.playAgain();
-        assertTrue(true);
     }
 
     @Test

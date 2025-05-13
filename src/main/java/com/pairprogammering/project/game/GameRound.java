@@ -32,16 +32,17 @@ public class GameRound {
 
     public void play() {
         boolean playAgain;
+        ui.welcomeMessage();
         do {
-            ui.welcomeMessage();
             playRound();
             playAgain = ui.askPlayAgain();
         } while (playAgain);
 
-        ui.showMessage("Thanks for playing!");
+        ui.showMessage("♣♦♥♠ Thanks for playing! ♥♠♣♦");
     }
 
-    private void playRound() {
+    public void playRound() {
+        resetHands();
         deck.shuffle();
 
         dealInitialCards();
@@ -115,11 +116,14 @@ public class GameRound {
         ui.showHand("Dealer", dealer.getHand(), total);
 
         if (total > 21) {
-            ui.showMessage("Dealer busts! You win!");
+            ui.showMessage("Dealer busts! ♥♠♣♦ You win! ♣♦♥♠");
             return true;
         }
-
         return false;
     }
 
+    private void resetHands() {
+        player.clearHand();
+        dealer.clearHand();
+    }
 }

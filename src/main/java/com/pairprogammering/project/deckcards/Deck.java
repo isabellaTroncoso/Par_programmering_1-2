@@ -8,8 +8,6 @@ public class Deck {
     public ArrayList<Card> cards;
     ArrayList<Card> discardPile;
 
-    Random random = new Random();
-
     public Deck() {
         cards = new ArrayList<>();
         discardPile = new ArrayList<>();
@@ -35,19 +33,4 @@ public class Deck {
             return null;
         }
     }
-
-    public void discardCard(Card card) {
-        if (card != null) {
-            discardPile.add(card);
-            System.out.println("Card discarded " + card);
-        }
-    }
-
-
-
-
-
-
-
-
 }
