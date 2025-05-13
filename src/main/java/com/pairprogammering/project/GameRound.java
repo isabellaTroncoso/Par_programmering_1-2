@@ -1,9 +1,9 @@
-package com.pairprogammering.project.blackjack;
+package com.pairprogammering.project;
 
-public class Blackjack {
+public class GameRound {
     private GameLogic game;
 
-    public Blackjack() {
+    public GameRound() {
         this.game = new GameLogic();
     }
 

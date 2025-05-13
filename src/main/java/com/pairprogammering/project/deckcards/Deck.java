@@ -1,4 +1,4 @@
-package com.pairprogammering.project.blackjack;
+package com.pairprogammering.project.deckcards;
 
 import java.util.ArrayList;
 import java.util.Collections;

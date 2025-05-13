@@ -1,4 +1,7 @@
-package com.pairprogammering.project.blackjack;
+package com.pairprogammering.project;
+
+import com.pairprogammering.project.deckcards.Card;
+import com.pairprogammering.project.deckcards.Deck;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,7 +47,7 @@ public class GameLogic {
         }
         System.out.println("Total points: " + calculateScore(dealer.getHand()));
     }
-
+    // GameRound
     public boolean playerTurn() {
         Scanner scanner = new Scanner(System.in);
 
@@ -74,17 +77,14 @@ public class GameLogic {
         }
     }
 
-
-
-
-
+    // GameRound
     public void playerHit() {
         player.addCard(deck.drawCard());
         System.out.println("Your hand: " + player.getHand() + " Total points: " + calculateScore(player.getHand()));
     }
 
 
-
+    // GameRound
     public boolean dealerTurn() {
         while (calculateScore(dealerHand) < 17) {
             Card newCard = deck.drawCard();
@@ -101,6 +101,7 @@ public class GameLogic {
         System.out.println("Dealer's hand: " + dealerHand + " Total points: " + calculateScore(dealerHand));
         return dealerTotal > 21;
     }
+
 
     public int calculateScore(List<Card> hand) {
         int score = 0;
@@ -142,6 +143,7 @@ public class GameLogic {
         }
     }
 
+    // GameRound
     public void playOneRound() {
         startGame();
 
@@ -170,7 +172,7 @@ public class GameLogic {
     }
 
 
-
+  // GameRound
     public void playAgain() {
         Scanner scanner = new Scanner(System.in);
         boolean playAgain = true;
@@ -187,3 +189,9 @@ public class GameLogic {
     }
 
 }
+/*
+* En klass som hanterar scanner input och system.out.println
+* En klass som hanterar spelets regler, score, ace till 1 eller 11
+* En klass som kör spelet, rundor, players turn etc
+* En interface som för if-else if-else
+* */

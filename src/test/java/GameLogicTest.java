@@ -1,5 +1,5 @@
-import com.pairprogammering.project.blackjack.Card;
-import com.pairprogammering.project.blackjack.GameLogic;
+import com.pairprogammering.project.deckcards.Card;
+import com.pairprogammering.project.GameLogic;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 

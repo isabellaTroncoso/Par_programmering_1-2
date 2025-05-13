@@ -1,5 +1,5 @@
-import com.pairprogammering.project.blackjack.Card;
-import com.pairprogammering.project.blackjack.Deck;
+import com.pairprogammering.project.deckcards.Card;
+import com.pairprogammering.project.deckcards.Deck;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
