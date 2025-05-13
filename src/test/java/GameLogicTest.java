@@ -1,5 +1,6 @@
+import com.pairprogammering.project.game.GameRound;
 import com.pairprogammering.project.deckcards.Card;
-import com.pairprogammering.project.GameLogic;
+import com.pairprogammering.project.game.GameLogic;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
@@ -81,8 +82,8 @@ public class GameLogicTest {
 
     @Test
     void choiceToPlayAgainOrEndTheGame () {
-        GameLogic gameLogic = new GameLogic();
-        gameLogic.playAgain();
+        GameRound gameRound = new GameRound();
+        gameRound.playAgain();
         assertTrue(true);
     }
 
