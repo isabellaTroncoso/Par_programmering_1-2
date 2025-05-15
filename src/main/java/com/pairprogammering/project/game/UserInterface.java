@@ -1,4 +1,4 @@
-package com.pairprogammering.project;
+package com.pairprogammering.project.game;
 
 import com.pairprogammering.project.deckcards.Card;
 

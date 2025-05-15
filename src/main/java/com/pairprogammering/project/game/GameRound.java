@@ -1,34 +1,18 @@
 package com.pairprogammering.project.game;
 
-import com.pairprogammering.project.Player;
-import com.pairprogammering.project.UserInterface;
+import com.pairprogammering.project.score.BlackjackScoring;
 import com.pairprogammering.project.deckcards.Card;
 import com.pairprogammering.project.deckcards.Deck;
 
-import java.util.ArrayList;
-import java.util.Scanner;
-
-import static com.pairprogammering.project.game.GameLogic.calculateScore;
-import static com.pairprogammering.project.game.GameLogic.determineWinner;
-
 public class GameRound {
-    private GameLogic game;
+
     private Deck deck = new Deck();
-    public Player player;
-    public Player dealer;
-    public ArrayList<Card> playerHand;
-    public ArrayList<Card> dealerHand;
+    private Player player = new Player("Player", 0);
+    private Player dealer = new Player("Dealer", 0);
+    BlackjackScoring scoring = new BlackjackScoring();
+
+
     private final UserInterface ui = new UserInterface();
-
-
-    public GameRound() {
-        this.game = new GameLogic();
-        this.player = new Player("Player", 0);
-        this.dealer = new Player("Dealer", 0);
-        this.deck = new Deck();
-        this.playerHand = new ArrayList<>();
-        this.dealerHand = new ArrayList<>();
-    }
 
     public void play() {
         boolean playAgain;
@@ -67,13 +51,13 @@ public class GameRound {
     }
 
     private void showInitialHands() {
-        ui.showHand("Player", player.getHand(), GameLogic.calculateScore(player.getHand()));
-        ui.showHand("Dealer", dealer.getHand(), GameLogic.calculateScore(dealer.getHand()));
+        ui.showHand("Player", player.getHand(), scoring.calculateScore(player.getHand(), 0));
+        ui.showHand("Dealer", dealer.getHand(), scoring.calculateScore(dealer.getHand(),  0));
     }
 
     private boolean isBlackjackOrBust() {
-        int pScore = GameLogic.calculateScore(player.getHand());
-        int dScore = GameLogic.calculateScore(dealer.getHand());
+        int pScore = scoring.calculateScore(player.getHand(), 0);
+        int dScore = scoring.calculateScore(dealer.getHand(), 0);
 
         if (pScore == 21 && dScore == 21) {
             ui.showMessage("Both have Blackjack! It's a tie!");
@@ -87,7 +71,7 @@ public class GameRound {
             String choice = ui.askPlayerChoice();
             if (choice.equalsIgnoreCase("hit")) {
                 player.addCard(deck.drawCard());
-                int total = GameLogic.calculateScore(player.getHand());
+                int total = scoring.calculateScore(player.getHand(), 0);
                 ui.showHand(name, player.getHand(), total);
 
                 if (total > 21) {
@@ -106,13 +90,13 @@ public class GameRound {
     }
 
     private boolean dealerTurn() {
-        while (GameLogic.calculateScore(dealer.getHand()) < 17) {
+        while (scoring.calculateScore(dealer.getHand(), 0) < 17) {
             Card card = deck.drawCard();
             dealer.addCard(card);
             ui.showMessage("Dealer drew: " + card);
         }
 
-        int total = GameLogic.calculateScore(dealer.getHand());
+        int total = scoring.calculateScore(dealer.getHand(),0);
         ui.showHand("Dealer", dealer.getHand(), total);
 
         if (total > 21) {
@@ -127,3 +111,6 @@ public class GameRound {
         dealer.clearHand();
     }
 }
+
+// kolla med kristoffer vad han tycker om handleturn metoden
+// ändra bort lite metod namn så att det passar med funktionen

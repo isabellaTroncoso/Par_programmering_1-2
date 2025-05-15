@@ -1,4 +1,4 @@
-import com.pairprogammering.project.game.GameRound;
+import com.pairprogammering.project.score.BlackjackScoring;
 import com.pairprogammering.project.deckcards.Card;
 import com.pairprogammering.project.game.GameLogic;
 import static org.junit.jupiter.api.Assertions.*;
@@ -11,51 +11,46 @@ import java.util.List;
 public class GameLogicTest {
     @Test
     void calculateScore_ShouldTreatAceAs11Or1() {
+        BlackjackScoring scoring = new BlackjackScoring();
         List<Card> hand = Arrays.asList(
                 new Card("♠", "Ace"),
                 new Card("♥", "9"),
                 new Card("♣", "5")
         );
 
-        GameLogic gameLogic = new GameLogic();
-        int total = gameLogic.calculateScore(hand);
+        int total = scoring.calculateScore(hand, 0);
 
         assertEquals(15, total);
     }
 
     @Test
     void calculateScore_ShouldReturnCorrectTotalForHandWithNoAces() {
-        // Arrange – skapa en hand utan ess
+        BlackjackScoring scoring = new BlackjackScoring();
         List<Card> hand = Arrays.asList(
                 new Card("Hearts", "2"),
                 new Card("Hearts", "3")
         );
 
-        GameLogic gameLogic = new GameLogic();
-
-        // Act
-        int total = gameLogic.calculateScore(hand);
-
-        // Assert
+        int total = scoring.calculateScore(hand, 0);
         assertEquals(5, total);
     }
 
     @Test
     void calculateScore_ShouldHandleFaceCardsCorrectly() {
+        BlackjackScoring scoring = new BlackjackScoring();
         List<Card> hand = Arrays.asList(
                 new Card("Spades", "King"),
                 new Card("Diamonds", "Queen")
         );
 
-        GameLogic gameLogic = new GameLogic();
-        int total = gameLogic.calculateScore(hand);
+        int total = scoring.calculateScore(hand, 0);
 
         assertEquals(20, total);
     }
 
     @Test
     void determineWinner_ShouldDeclarePlayerAsWinner() {
-        GameLogic gameLogic = new GameLogic();
+
 
         Card card1 = new Card("♠", "Queen");
         Card card2 = new Card("♥", "10");
@@ -63,44 +58,30 @@ public class GameLogicTest {
         Card card3 = new Card("♠", "9");
         Card card4 = new Card("♦", "9");
 
-        gameLogic.playerHand = new ArrayList<>(Arrays.asList(card1, card2));
-        gameLogic.dealerHand = new ArrayList<>(Arrays.asList(card3, card4));
+        GameLogic.playerHand = new ArrayList<>(Arrays.asList(card1, card2));
+        GameLogic.dealerHand = new ArrayList<>(Arrays.asList(card3, card4));
 
-        gameLogic.player.setHand(gameLogic.playerHand);
-        gameLogic.dealer.setHand(gameLogic.dealerHand);
+        GameLogic.player.setHand(GameLogic.playerHand);
+        GameLogic.dealer.setHand(GameLogic.dealerHand);
 
-        String winner = gameLogic.determineWinner(gameLogic.player, gameLogic.dealer);
+        String winner = GameLogic.determineWinner(GameLogic.player, GameLogic.dealer);
 
         assertEquals("Player wins!", winner);
     }
 
     @Test
     void showScoreOrStatusFromEveryCardDraw_countingPoints(){
-        GameLogic gameLogic = new GameLogic();
+        BlackjackScoring scoring = new BlackjackScoring();
+
         List<Card> hand = new ArrayList<>();
         hand.add(new Card("♠", "10"));
         hand.add(new Card("♥", "9"));
-        System.out.println("Current hand: " + gameLogic.calculateScore(hand));
-        assertEquals(19, gameLogic.calculateScore(hand));
+        System.out.println("Current hand: " + scoring.calculateScore(hand,0));
+        assertEquals(19, scoring.calculateScore(hand,0));
     }
 }
 
-    //  Tydlig återkoppling till spelaren
-    //Tex. visa total poäng, status efter varje drag (hit/stand).
-    //
-    //Test: Efter varje hit visas aktuell poäng
-    //
-    //Behöver: Utskrift och logik i playerHit()
-    //
-    // Hantera blackjack direkt
-    //Om någon får exakt 21 poäng från start, bör det hanteras.
-    //
-    //Test: Givet en hand med Ace + King → spelet avslutas med vinst
-    //
-    //Behöver: Kontroll direkt efter start
-    //
-    // TDD-tester för Player-klassen
-    //Exempel: Testa att addCard() lägger till kort i spelarens hand korrekt.
+
 
 
 

@@ -1,4 +1,4 @@
-package com.pairprogammering.project;
+package com.pairprogammering.project.game;
 
 import com.pairprogammering.project.deckcards.Card;
 
@@ -10,7 +10,7 @@ public class Player {
     private int handValue = 0;
     private List<Card> hand;
 
-    public Player(String name, int handValue) {
+    public Player(String name, int score) {
         this.name = name;
         this.handValue = 0;
         this.hand = new ArrayList<>();
