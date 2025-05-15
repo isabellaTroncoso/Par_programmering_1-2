@@ -1,16 +1,27 @@
 package com.pairprogammering.project.deckcards;
 
+import com.pairprogammering.project.game.Player;
+import com.pairprogammering.project.game.UserInterface;
+import com.pairprogammering.project.blackjackgame.BlackjackCalculate;
+
 import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Random;
 
 public class Deck {
     public ArrayList<Card> cards;
     ArrayList<Card> discardPile;
+    final UserInterface ui = new UserInterface();
+    private Player dealer;
+    private Player player;
+    private BlackjackCalculate scoring;
 
-    public Deck() {
-        cards = new ArrayList<>();
-        discardPile = new ArrayList<>();
+
+    public Deck(Player player, Player dealer, BlackjackCalculate scoring) {
+        this.cards = new ArrayList<>();
+        this.discardPile = new ArrayList<>();
+        this.dealer = dealer;
+        this.player = player;
+        this.scoring = scoring;
 
         String [] suit = {"♣", "♦", "♥", "♠"};
         String [] value = {"2", "3", "4", "5", "6", "7", "8", "9", "10", "Jack", "Queen", "King", "Ace"};
@@ -32,5 +43,22 @@ public class Deck {
         } else {
             return null;
         }
+    }
+
+    public void dealInitialCards() {
+        for (int i = 0; i < 2; i++) {
+            player.addCard(drawCard());
+            dealer.addCard(drawCard());
+        }
+    }
+
+    public void showInitialHands() {
+        ui.showHand("Player", player.getHand(), scoring.calculateScore(player.getHand(), 0));
+        ui.showHand("Dealer", dealer.getHand(), scoring.calculateScore(dealer.getHand(),  0));
+    }
+
+    public void resetHands() {
+        player.clearHand();
+        dealer.clearHand();
     }
 }

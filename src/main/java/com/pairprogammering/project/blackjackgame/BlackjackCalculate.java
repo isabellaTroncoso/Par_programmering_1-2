@@ -1,10 +1,11 @@
-package com.pairprogammering.project.score;
+package com.pairprogammering.project.blackjackgame;
 
 import com.pairprogammering.project.deckcards.Card;
+import com.pairprogammering.project.game.Score;
 
 import java.util.List;
 
-public class BlackjackScoring implements Score {
+public class BlackjackCalculate implements Score {
     @Override
     public int calculateScore(List<Card> hand, int score) {
         score = 0;
@@ -27,7 +28,6 @@ public class BlackjackScoring implements Score {
             score -= 10;
             aceCount--;
         }
-
         return score;
     }
 }

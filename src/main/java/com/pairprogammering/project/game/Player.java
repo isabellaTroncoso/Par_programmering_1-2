@@ -7,17 +7,19 @@ import java.util.List;
 
 public class Player {
     private String name;
-    private int handValue = 0;
     private List<Card> hand;
 
     public Player(String name, int score) {
         this.name = name;
-        this.handValue = 0;
         this.hand = new ArrayList<>();
     }
 
     public List<Card> getHand() {
         return hand;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public void setHand(List<Card> hand) {
