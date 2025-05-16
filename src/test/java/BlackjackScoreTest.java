@@ -37,7 +37,7 @@ public class BlackjackScoreTest {
     }
 
     @Test
-    void showScoreOrStatusFromEveryCardDraw_countingPoints(){
+    void showScoreFromEveryCardDrawInHands(){
         BlackjackCalculate scoring = new BlackjackCalculate();
 
         List<Card> hand = new ArrayList<>();

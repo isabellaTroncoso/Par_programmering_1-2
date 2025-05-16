@@ -7,7 +7,7 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BalckjackCalculateTest {
+public class BlackjackCalculateTest {
 
     @Test
     void calculateScore_ShouldTreatAceAs11Or1() {
